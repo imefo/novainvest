@@ -7,12 +7,12 @@
   <title>NovaInvest — سرمایه‌گذاری هوشمند (نسخه نمایشی)</title>
 
   <!-- SEO -->
-  <meta name="description" content="NovaInvest — نسخه نمایشی ویترین: ثبت‌نام سریع، پلن ۱۲٪ ماهانه و ورود در صفحه اصلی.">
+  <meta name="description" content="NovaInvest — صفحه اصلی با هیرو بزرگ، ثبت‌نام سریع، پلن‌ها، ورود و فرم تماس. داشبورد جداگانه در /dashboard.html">
   <meta name="theme-color" content="#7c4dff">
 
   <!-- Open Graph -->
   <meta property="og:title" content="NovaInvest — سرمایه‌گذاری هوشمند">
-  <meta property="og:description" content="ثبت‌نام سریع + پلن‌ها + ورود در صفحه اصلی. تم تیره مدرن.">
+  <meta property="og:description" content="ثبت‌نام سریع + پلن‌ها + ورود در صفحه اصلی. داشبورد در /dashboard.html">
   <meta property="og:type" content="website">
 
   <!-- Favicon (SVG inline) -->
@@ -29,11 +29,12 @@
       --accent:#7c4dff; --gold:#d4af37; --ring:rgba(124,77,255,.3); --radius:16px;
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Tahoma, Arial, sans-serif;background:
-      radial-gradient(1200px 600px at 10% 10%, #1a1430 0%, #0d0d12 40%),
-      radial-gradient(1000px 500px at 90% 0%, #221a3d 0%, rgba(13,13,18,1) 50%),
-      #0d0d12;
-      color:var(--text);
+    body{
+      margin:0;font-family:Tahoma, Arial, sans-serif;color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% 10%, #1a1430 0%, #0d0d12 40%),
+        radial-gradient(1000px 500px at 90% 0%, #221a3d 0%, rgba(13,13,18,1) 50%),
+        #0d0d12;
     }
     a{color:inherit;text-decoration:none}
     .container{max-width:1200px;margin:0 auto;padding:20px}
@@ -56,10 +57,7 @@
     @media(max-width:980px){.hero-wrap{grid-template-columns:1fr}}
     .hero-title{
       font-size: clamp(48px, 8vw, 92px);
-      line-height: 1;
-      margin: 0 0 16px;
-      font-weight: 900;
-      letter-spacing: .5px;
+      line-height: 1; margin: 0 0 16px; font-weight: 900; letter-spacing: .5px;
       background: conic-gradient(from 200deg, var(--gold), #ffea9f 20%, var(--gold) 40%, #b2882b 60%, var(--accent) 80%, var(--gold) 100%);
       -webkit-background-clip: text; background-clip: text; color: transparent;
       filter: drop-shadow(0 10px 40px rgba(212,175,55,.15));
@@ -98,6 +96,8 @@
       <a href="#plans">پلن‌ها</a>
       <a href="#login">ورود</a>
       <a href="#contact">تماس</a>
+      <!-- لینک داشبورد به فایل جدا -->
+      <a class="btn" href="/dashboard.html">داشبورد</a>
     </nav>
   </div>
 </header>
@@ -108,10 +108,11 @@
     <div class="hero-wrap">
       <div>
         <h1 class="hero-title">NovaInvest</h1>
-        <p class="hero-sub">سرمایه‌گذاری هوشمند در هوش مصنوعی و بازارهای مالی — ویترین سریع با ثبت‌نام اولیه، نمایش پلن‌ها و ورود در یک صفحه.</p>
+        <p class="hero-sub">سرمایه‌گذاری هوشمند در هوش مصنوعی و بازارهای مالی — ثبت‌نام سریع، مشاهده پلن‌ها و ورود در همین صفحه. داشبورد در /dashboard.html</p>
         <div class="hero-cta">
           <a class="btn primary" href="#plans">مشاهده پلن‌ها</a>
           <a class="btn" href="#login">ورود</a>
+          <a class="btn" href="/dashboard.html">رفتن به داشبورد</a>
         </div>
       </div>
 
@@ -207,49 +208,28 @@
 
 <script>
   // حالت نمایشی: ذخیره روی LocalStorage
-  const ST = { users: [], session: null, balance: 0, plans: [], txs: [] };
-  const LS_KEY = "novainvest_demo_v1";
-  const RATE = 0.12;  // 12% ماهانه
-  const PLAN_MIN = 100;
+  const ST = JSON.parse(localStorage.getItem("novainvest_demo_v1") || '{"users":[],"session":null,"balance":0,"plans":[],"txs":[]}');
 
-  function save(){ localStorage.setItem(LS_KEY, JSON.stringify(ST)); render(); }
-  function load(){
-    try{ Object.assign(ST, JSON.parse(localStorage.getItem(LS_KEY)||"{}")); }catch(e){}
-    render();
-  }
+  function save(){ localStorage.setItem("novainvest_demo_v1", JSON.stringify(ST)); }
+  function load(){ document.getElementById('year').textContent = new Date().getFullYear(); }
   function register(){
     const n = document.getElementById('rName').value.trim();
     const e = document.getElementById('rEmail').value.trim();
     const p = document.getElementById('rPass').value;
     if(!n || !e || !p) return alert('فیلدهای ضروری را تکمیل کنید.');
     if(ST.users.find(u=>u.e===e)) return alert('این ایمیل قبلاً ثبت شده.');
-    ST.users.push({ n, e, p });
-    ST.session = e;
-    alert('ثبت‌نام انجام شد (نمایشی).');
-    save();
+    ST.users.push({ n, e, p }); ST.session = e; save();
+    alert('ثبت‌نام انجام شد (نمایشی). اکنون می‌توانید به داشبورد بروید.');
   }
   function login(){
     const e = document.getElementById('lEmail').value.trim();
     const p = document.getElementById('lPass').value;
     const u = ST.users.find(u=>u.e===e && u.p===p);
     const out = document.getElementById('loginOut');
-    if(u){ ST.session = e; out.textContent='ورود موفق ✅'; save(); }
+    if(u){ ST.session = e; save(); out.textContent='ورود موفق ✅'; }
     else { out.textContent='ایمیل یا رمز نادرست است.'; }
   }
-  function buyPlan(){
-    if(!ST.session) return alert('ابتدا وارد شوید.');
-    const price = PLAN_MIN;
-    if(ST.balance < price) return alert('موجودی کافی نیست. ابتدا واریز کنید (نسخه نمایشی).');
-    ST.balance -= price;
-    const plan = { name:'AI-1M', months:1, rate:RATE, principal:price, start: Date.now() };
-    ST.plans.push(plan);
-    ST.txs.unshift({ t:'BUY_PLAN', amt:-price, ts:Date.now(), meta:plan.name });
-    alert('پلن فعال شد (نمایشی).');
-    save();
-  }
-  function render(){
-    document.getElementById('year').textContent = new Date().getFullYear();
-  }
+  function buyPlan(){ alert('در نسخه نمایشی، ابتدا باید وارد شوید و موجودی داشته باشید.'); }
   load();
 </script>
 
