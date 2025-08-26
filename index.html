@@ -199,30 +199,16 @@
       <div class="card"><div class="muted">سود ماه جاری</div><div id="dPnl" style="font-size:28px;font-weight:800">0 USDT</div></div>
     </div>
   </section>
-
-  <section id="contact" class="section">
-    <h2>تماس با ما</h2>
-    <!-- Netlify Forms -->
-    <form name="contact" method="POST" data-netlify="true" class="card" style="max-width:640px">
-      <input type="hidden" name="form-name" value="contact">
-      <div class="grid grid-2">
-        <div>
-          <label>نام</label>
-          <input name="name" required>
-        </div>
-        <div>
-          <label>ایمیل</label>
-          <input type="email" name="email" required>
-        </div>
-      </div>
-      <div style="margin-top:10px">
-        <label>پیام</label>
-        <textarea name="message" rows="4" required></textarea>
-      </div>
-      <button type="submit" class="btn primary" style="margin-top:10px">ارسال پیام</button>
-      <p class="muted" style="margin-top:6px">* پیام‌های ارسال‌شده در بخش Forms نتلیفای نمایش داده می‌شوند.</p>
-    </form>
-  </section>
+<section id="contact">
+  <h2>تماس با ما</h2>
+  <form name="contact" method="POST" data-netlify="true">
+    <input type="hidden" name="form-name" value="contact">
+    <p><input type="text" name="name" placeholder="نام" required></p>
+    <p><input type="email" name="email" placeholder="ایمیل" required></p>
+    <p><textarea name="message" placeholder="پیام" required></textarea></p>
+    <p><button type="submit">ارسال</button></p>
+  </form>
+</section>
 </main>
 
 <footer>
