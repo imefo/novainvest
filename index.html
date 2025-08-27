@@ -3,31 +3,22 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-
 <title>NovaInvest — سرمایه‌گذاری هوشمند (نمایشی)</title>
-
-<!-- SEO -->
-<meta name="description" content="NovaInvest — صفحه واحد با هیرو بزرگ، ثبت‌نام سریع، پلن‌ها، ورود، داشبورد، درباره، FAQ، قوانین، پرداخت تستی و پنل ادمین نمایشی.">
-<meta name="theme-color" content="#7c4dff">
-
-<!-- Open Graph -->
-<meta property="og:title" content="NovaInvest — سرمایه‌گذاری هوشمند">
-<meta property="og:description" content="ثبت‌نام سریع + پلن‌ها + ورود + داشبورد در یک فایل.">
-
-<!-- Favicon (SVG inline) -->
+<meta name="description" content="NovaInvest — SPA یک‌فایلی: خانه، پلن‌ها، ورود، داشبورد، درباره، FAQ، قوانین، پرداخت تستی و پنل ادمین نمایشی." />
+<meta name="theme-color" content="#7c4dff" />
+<meta property="og:title" content="NovaInvest — سرمایه‌گذاری هوشمند" />
+<meta property="og:description" content="ثبت‌نام سریع + پلن‌ها + ورود + داشبورد در یک فایل." />
 <link rel="icon" href='data:image/svg+xml;utf8,
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
   <rect width="256" height="256" rx="48" fill="#0d0d12"/>
   <path d="M64 192V64l96 96V64" fill="none" stroke="%237c4dff" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
   <circle cx="200" cy="56" r="12" fill="%23d4af37"/>
 </svg>'>
-
 <style>
 :root{
   --bg:#0d0d12; --panel:#151521; --text:#e8e8f3; --muted:#a4a4bf;
   --accent:#7c4dff; --gold:#d4af37; --ring:rgba(124,77,255,.30);
-  --success:#4ade80; --warn:#fbbf24; --danger:#fb7185;
-  --radius:16px;
+  --success:#4ade80; --warn:#fbbf24; --danger:#fb7185; --radius:16px;
 }
 *{box-sizing:border-box}
 body{
@@ -52,7 +43,6 @@ header{position:sticky;top:0;z-index:10;background:#0f0f17cc;border-bottom:1px s
 .btn:hover{transform:translateY(-1px);box-shadow:0 10px 26px var(--ring)}
 .btn.primary{background:var(--accent);border-color:transparent}
 .btn.ghost{background:transparent}
-
 .card{background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:18px}
 .glass{backdrop-filter: blur(10px) saturate(140%);background:rgba(25,25,38,.6)}
 .field{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
@@ -125,7 +115,7 @@ canvas{width:100%;height:100%;display:block}
       <a href="#terms" data-route>قوانین</a>
       <a href="#pay" data-route>پرداخت تستی</a>
       <a href="#contact" data-route>تماس</a>
-      <!-- لینک ادمین (پنهان تا وقتی admin=true شود) -->
+      <!-- لینک ادمین (پنهان تا زمانی که admin=true شود) -->
       <a href="#admin" id="adminLink" class="hidden" data-route>ادمین</a>
     </nav>
   </div>
@@ -168,7 +158,7 @@ canvas{width:100%;height:100%;display:block}
       </div>
     </section>
 
-    <!-- پلن‌ها پیش‌نمایش -->
+    <!-- پلن‌ها خلاصه (در خانه) -->
     <section class="section">
       <h2>پلن‌های سرمایه‌گذاری</h2>
       <div class="grid grid-3">
@@ -211,18 +201,22 @@ canvas{width:100%;height:100%;display:block}
     </section>
   </section>
 
+  <!-- PLANS (صفحه جدا) -->
+  <section id="plans" class="route hidden section">
+    <h2>پلن‌ها</h2>
+    <div class="grid grid-3">
+      <div class="card"><div class="plan-title">AI Conservative</div><div class="plan-rate">۸٪ / ماه</div><ul class="muted" style="line-height:1.9"><li>حداقل: 100 USDT</li><li>مدت: 1 ماه</li><li>سود: ساده</li><li>پرداخت: پایان دوره</li></ul><a class="btn primary" href="#login">شروع</a></div>
+      <div class="card"><div class="plan-title">AI Growth</div><div class="plan-rate">۱۲٪ / ماه</div><ul class="muted" style="line-height:1.9"><li>حداقل: 100 USDT</li><li>مدت: 1 ماه</li><li>سود: ساده</li><li>پرداخت: پایان دوره</li></ul><a class="btn primary" href="#login">شروع</a></div>
+      <div class="card"><div class="plan-title">AI Pro</div><div class="plan-rate">۱۵٪ / ماه</div><ul class="muted" style="line-height:1.9"><li>حداقل: 300 USDT</li><li>مدت: 1 ماه</li><li>سود: ساده</li><li>پرداخت: پایان دوره</li></ul><a class="btn primary" href="#login">شروع</a></div>
+    </div>
+  </section>
+
   <!-- LOGIN -->
   <section id="login" class="route hidden section">
     <h2>ورود</h2>
     <div class="card grid grid-2">
-      <div>
-        <label>ایمیل</label>
-        <input id="lEmail" type="email">
-      </div>
-      <div>
-        <label>رمز عبور</label>
-        <input id="lPass" type="password">
-      </div>
+      <div><label>ایمیل</label><input id="lEmail" type="email"></div>
+      <div><label>رمز عبور</label><input id="lPass" type="password"></div>
       <button class="btn primary" onclick="login()">ورود</button>
       <p id="loginOut" class="muted"></p>
     </div>
@@ -350,39 +344,105 @@ canvas{width:100%;height:100%;display:block}
     </form>
   </section>
 
-  <!-- ADMIN (hidden link) -->
+  <!-- ADMIN (hidden link + قفل ورود) -->
   <section id="admin" class="route hidden section">
     <h1>پنل ادمین (نمایشی)</h1>
 
-    <div class="card">
-      <h3>کاربران</h3>
-      <div style="overflow:auto;max-height:300px">
-        <table>
-          <thead><tr><th>نام</th><th>ایمیل</th></tr></thead>
-          <tbody id="admUsers"></tbody>
-        </table>
+    <!-- قفل ورود -->
+    <div id="admLock" class="card">
+      <h3>ورود ادمین</h3>
+      <p class="muted">* نسخه نمایشی (محلی)</p>
+      <div class="row">
+        <div><label>ایمیل</label><input id="admEmail" placeholder="admin@novainvest.local" value="admin@novainvest.local"></div>
+        <div><label>رمز عبور</label><input id="admPass" type="password" placeholder="admin123" value="admin123"></div>
+      </div>
+      <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn primary" onclick="admLogin()">ورود</button>
+        <span class="muted" id="admMsg"></span>
       </div>
     </div>
 
-    <div class="card" style="margin-top:14px">
-      <h3>تراکنش‌ها</h3>
-      <div style="overflow:auto;max-height:300px">
-        <table>
-          <thead><tr><th>تاریخ</th><th>نوع</th><th>مبلغ</th><th>توضیح</th></tr></thead>
-          <tbody id="admTx"></tbody>
-        </table>
+    <div id="admWrap" class="hidden">
+      <!-- KPIs -->
+      <section class="grid grid-3" style="margin-top:14px">
+        <div class="card"><h3>کاربران</h3><div id="kUsers" class="muted">0</div></div>
+        <div class="card"><h3>پلن‌های فعال</h3><div id="kPlans" class="muted">0</div></div>
+        <div class="card"><h3>موجودی تجمیعی</h3><div id="kBalance" class="muted">0 USDT</div></div>
+      </section>
+
+      <div class="grid grid-2" style="margin-top:14px">
+        <!-- Users -->
+        <div class="card">
+          <h3>مدیریت کاربران</h3>
+          <div class="muted" style="margin:.5rem 0">حذف / ریست رمز / ورود به حساب کاربر</div>
+          <div style="overflow:auto;max-height:340px">
+            <table>
+              <thead><tr><th>نام</th><th>ایمیل</th><th>اقدام</th></tr></thead>
+              <tbody id="admUsers"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Master Plans -->
+        <div class="card">
+          <h3>قالب پلن‌ها</h3>
+          <div class="row">
+            <div><label>نام پلن</label><input id="mName" placeholder="AI Growth"></div>
+            <div><label>نرخ ماهانه (%)</label><input id="mRate" type="number" value="12"></div>
+            <div><label>حداقل سرمایه</label><input id="mMin" type="number" value="100"></div>
+            <div><label>مدت (ماه)</label><input id="mMonths" type="number" value="1"></div>
+          </div>
+          <div style="margin-top:8px;display:flex;gap:8px">
+            <button class="btn primary" onclick="addMasterPlan()">افزودن/به‌روزرسانی</button>
+            <button class="btn" onclick="clearMasters()">حذف همه</button>
+          </div>
+          <div style="overflow:auto;margin-top:10px;max-height:180px">
+            <table>
+              <thead><tr><th>نام</th><th>نرخ</th><th>حداقل</th><th>مدت</th><th>اقدام</th></tr></thead>
+              <tbody id="mastersBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Transactions -->
+      <section class="card" style="margin-top:14px">
+        <h3>تراکنش‌ها</h3>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin:.5rem 0">
+          <button class="btn" onclick="exportCSV()">خروجی CSV</button>
+          <button class="btn" onclick="exportJSON()">خروجی JSON</button>
+          <label class="btn">ورود JSON<input id="importInput" type="file" accept="application/json" style="display:none" onchange="importJSON(event)"></label>
+        </div>
+        <div style="overflow:auto;max-height:380px">
+          <table>
+            <thead><tr><th>تاریخ</th><th>نوع</th><th>مبلغ</th><th>توضیح</th><th>وضعیت</th><th>اقدام</th></tr></thead>
+            <tbody id="admTx"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- News -->
+      <section class="card" style="margin-top:14px">
+        <h3>اطلاعیه‌ها</h3>
+        <div class="row">
+          <div><label>متن اطلاعیه</label><input id="newsText" placeholder="مثال: پلن جدید اضافه شد"></div>
+          <div><label>&nbsp;</label><button class="btn primary" onclick="addNews()">افزودن</button></div>
+        </div>
+        <ul id="newsList" class="muted" style="line-height:1.9;margin-top:10px"></ul>
+      </section>
+
+      <div style="margin-top:10px">
+        <button class="btn" onclick="admLogout()">خروج از پنل</button>
       </div>
     </div>
   </section>
 
 </main>
 
-<footer>
-  © <span id="year"></span> NovaInvest — تمامی حقوق محفوظ است.
-</footer>
+<footer>© <span id="year"></span> NovaInvest — تمامی حقوق محفوظ است.</footer>
 
 <script>
-// ======= SPA Router (hash routes) =======
+// ===== Router =====
 const routes = ["home","plans","login","dashboard","about","faq","terms","pay","contact","admin"];
 function showRoute(){
   const hash = (location.hash || "#home").replace("#","");
@@ -392,18 +452,17 @@ function showRoute(){
     el.classList.toggle("hidden", id!==hash && !(hash==="home" && id==="home"));
   });
   if(!routes.includes(hash)) location.hash = "#home";
-  if(hash==="admin") renderAdmin();
+  if(hash==="admin") onAdminRoute();
 }
 window.addEventListener("hashchange", showRoute);
 
-// ======= Demo State =======
+// ===== Demo State =====
 const LS_KEY = "novainvest_demo_v1";
-const ST = JSON.parse(localStorage.getItem(LS_KEY) || '{"users":[],"session":null,"balance":0,"plans":[],"txs":[],"pending":0,"ref":{"count":0,"reward":0}}');
-
+const ST = JSON.parse(localStorage.getItem(LS_KEY) || '{"users":[],"session":null,"balance":0,"plans":[],"txs":[],"pending":0,"ref":{"count":0,"reward":0},"news":[],"masters":[]}');
 function save(){ localStorage.setItem(LS_KEY, JSON.stringify(ST)); }
 function load(){ document.getElementById('year').textContent = new Date().getFullYear(); }
 
-// Register / Login
+// ===== Auth (user) =====
 function register(){
   const n = document.getElementById('rName').value.trim();
   const e = document.getElementById('rEmail').value.trim();
@@ -422,7 +481,7 @@ function login(){
   else { out.textContent='ایمیل یا رمز نادرست است.'; }
 }
 
-// Dashboard helpers
+// ===== Dashboard helpers =====
 const fmt = n => (Number(n).toFixed(2));
 const ts  = t => new Date(t).toLocaleString('fa-IR');
 
@@ -450,7 +509,7 @@ function mockActivatePlan(){
   save(); renderDashboard(); drawCharts();
 }
 
-// Export CSV
+// ===== Export CSV (tx) =====
 function exportCSV(){
   const rows = [['date','type','amount','meta','status']];
   (ST.txs||[]).forEach(x=> rows.push([new Date(x.ts).toISOString(), x.t, x.amt, x.meta||'', x.status||'']));
@@ -461,7 +520,7 @@ function exportCSV(){
   URL.revokeObjectURL(url);
 }
 
-// Pay-test
+// ===== Pay-test =====
 document.getElementById('net').addEventListener('change', e=>{
   const n = e.target.value;
   document.getElementById('addr').value = `NV-Demo-ADDR-${n}-${Math.random().toString(36).slice(2,10).toUpperCase()}`;
@@ -480,7 +539,7 @@ function markPaid(){
   setTimeout(()=> location.hash='#dashboard', 900);
 }
 
-// Render Dashboard
+// ===== Render Dashboard =====
 function renderDashboard(){
   const pnl = (ST.plans||[]).reduce((s,p)=> s + p.principal * p.rate, 0);
   const balEl = document.getElementById('kpiBalance'); if(balEl) balEl.textContent = fmt(ST.balance)+' USDT';
@@ -490,16 +549,15 @@ function renderDashboard(){
 
   const pb = document.getElementById('plansBody');
   if(pb){
-    pb.innerHTML = (ST.plans||[]).map(p=>{
-      return `<tr>
+    pb.innerHTML = (ST.plans||[]).map(p=>`
+      <tr>
         <td>${p.name}</td>
         <td>${fmt(p.principal)} USDT</td>
         <td>${(p.rate*100).toFixed(0)}٪</td>
         <td>${ts(p.start)}</td>
         <td>${ts(p.end)}</td>
         <td>${p.status==='ACTIVE' ? '<span class="tag ok">فعال</span>' : '<span class="tag">پایان‌یافته</span>'}</td>
-      </tr>`;
-    }).join('') || `<tr><td colspan="6" class="muted">پلن فعالی وجود ندارد.</td></tr>`;
+      </tr>`).join('') || `<tr><td colspan="6" class="muted">پلن فعالی وجود ندارد.</td></tr>`;
   }
 
   const tb = document.getElementById('txBody');
@@ -520,7 +578,7 @@ function renderDashboard(){
   }
 }
 
-// Minimal charts
+// ===== Mini Charts =====
 function drawLine(ctx, data, color){
   const W = ctx.canvas.width = ctx.canvas.clientWidth * devicePixelRatio;
   const H = ctx.canvas.height = ctx.canvas.clientHeight * devicePixelRatio;
@@ -555,7 +613,6 @@ function drawPie(ctx, parts, colors){
     ctx.fillStyle = colors[i % colors.length]; ctx.fill();
     ang += slice;
   });
-  // donut hole
   ctx.globalCompositeOperation='destination-out';
   ctx.beginPath(); ctx.arc(cx,cy,r*0.55,0,Math.PI*2); ctx.fill();
   ctx.globalCompositeOperation='source-over';
@@ -575,19 +632,12 @@ function drawCharts(){
   const pc = document.getElementById('pieChart'); if(pc) drawPie(pc.getContext('2d'), parts, ['#7c4dff','#d4af37','#4ade80','#fbbf24','#29b6f6']);
 }
 
-// ======= Admin (hidden link) =======
-function renderAdmin(){
-  const ub=document.getElementById('admUsers');
-  if(ub){
-    ub.innerHTML=(ST.users||[]).map(u=>`<tr><td>${u.n||'-'}</td><td style="direction:ltr">${u.e}</td></tr>`).join('')||'<tr><td colspan="2" class="muted">کاربری ثبت نشده.</td></tr>';
-  }
-  const tb=document.getElementById('admTx');
-  if(tb){
-    tb.innerHTML=(ST.txs||[]).map(x=>`<tr><td>${ts(x.ts)}</td><td>${x.t}</td><td style="direction:ltr">${x.amt>0? '+'+fmt(x.amt):fmt(x.amt)}</td><td>${x.meta||''}</td></tr>`).join('')||'<tr><td colspan="4" class="muted">تراکنشی نیست.</td></tr>';
-  }
-}
+// ===== Admin (state & UI) =====
+const ADMIN_KEY = "novainvest_admin_v1";
+const ADM = JSON.parse(localStorage.getItem(ADMIN_KEY) || '{"logged":false}');
+function saveAdm(){ localStorage.setItem(ADMIN_KEY, JSON.stringify(ADM)); }
 
-// نمایش لینک ادمین فقط در صورت فعال بودن
+// نمایش لینک ادمین اگر فعال شده
 (function(){
   if(localStorage.admin==="true"){
     const link = document.getElementById('adminLink');
@@ -595,7 +645,147 @@ function renderAdmin(){
   }
 })();
 
-// Boot
+// ورود/خروج ادمین
+function admLogin(){
+  const e = document.getElementById('admEmail').value.trim();
+  const p = document.getElementById('admPass').value;
+  const msg = document.getElementById('admMsg');
+  if(e==='admin@novainvest.local' && p==='admin123'){
+    ADM.logged = true; saveAdm(); msg.textContent = 'ورود موفق ✅';
+    document.getElementById('admLock').classList.add('hidden');
+    document.getElementById('admWrap').classList.remove('hidden');
+    renderAdminAll();
+  }else{
+    msg.textContent = 'نام کاربری یا رمز نادرست است.';
+  }
+}
+function admLogout(){
+  ADM.logged = false; saveAdm();
+  document.getElementById('admWrap').classList.add('hidden');
+  document.getElementById('admLock').classList.remove('hidden');
+}
+
+// رندر پنل ادمین
+function renderAdminAll(){
+  document.getElementById('kUsers').textContent = (ST.users||[]).length;
+  document.getElementById('kPlans').textContent = (ST.plans||[]).filter(p=>p.status==='ACTIVE').length;
+  document.getElementById('kBalance').textContent = (ST.balance||0).toFixed(2)+' USDT';
+
+  // Users
+  const ub = document.getElementById('admUsers');
+  ub.innerHTML = (ST.users||[]).map((u,i)=>`
+    <tr>
+      <td>${u.n||'-'}</td>
+      <td style="direction:ltr">${u.e}</td>
+      <td style="display:flex;gap:6px;flex-wrap:wrap">
+        <button class="btn" onclick="impersonate(${i})">Impersonate</button>
+        <button class="btn" onclick="resetPass(${i})">ریست رمز</button>
+        <button class="btn" onclick="delUser(${i})">حذف</button>
+      </td>
+    </tr>
+  `).join('') || `<tr><td colspan="3" class="muted">کاربری ثبت نشده.</td></tr>`;
+
+  // Master plans
+  ST.masters = ST.masters || [
+    {name:"AI Conservative", rate:8, min:100, months:1},
+    {name:"AI Growth", rate:12, min:100, months:1}
+  ];
+  const mb = document.getElementById('mastersBody');
+  mb.innerHTML = (ST.masters||[]).map((m,i)=>`
+    <tr>
+      <td>${m.name}</td>
+      <td>${m.rate}%</td>
+      <td>${m.min}</td>
+      <td>${m.months}</td>
+      <td><button class="btn" onclick="delMaster(${i})">حذف</button></td>
+    </tr>
+  `).join('');
+
+  // Transactions
+  const tb = document.getElementById('admTx');
+  tb.innerHTML = (ST.txs||[]).map((x,i)=>`
+    <tr>
+      <td>${ts(x.ts)}</td>
+      <td>${x.t}</td>
+      <td style="direction:ltr">${x.amt>0? '+'+fmt(x.amt):fmt(x.amt)}</td>
+      <td>${x.meta||''}</td>
+      <td>
+        <select onchange="setTxStatus(${i}, this.value)">
+          <option ${x.status==='OK'?'selected':''}>OK</option>
+          <option ${x.status==='PENDING'?'selected':''}>PENDING</option>
+          <option ${x.status==='FAILED'?'selected':''}>FAILED</option>
+        </select>
+      </td>
+      <td><button class="btn" onclick="delTx(${i})">حذف</button></td>
+    </tr>
+  `).join('') || `<tr><td colspan="6" class="muted">تراکنشی نیست.</td></tr>`;
+
+  // News
+  ST.news = ST.news || ["به NovaInvest خوش آمدید.", "این نسخه نمایشی است."];
+  const nl = document.getElementById('newsList');
+  nl.innerHTML = (ST.news||[]).map((t,i)=>`<li>${t} <button class="btn" onclick="delNews(${i})">حذف</button></li>`).join('');
+}
+
+// User actions
+function impersonate(i){ const u=(ST.users||[])[i]; if(!u) return; ST.session=u.e; save(); alert('ورود به حساب کاربر شد (نمایشی).'); location.hash='#dashboard'; }
+function resetPass(i){ const u=(ST.users||[])[i]; if(!u) return; const np=prompt('رمز جدید:', '12345678'); if(!np) return; u.p=np; save(); alert('رمز به‌روزرسانی شد.'); renderAdminAll(); }
+function delUser(i){ if(!confirm('حذف کاربر؟')) return; (ST.users||[]).splice(i,1); save(); renderAdminAll(); }
+
+// Master plans actions
+function addMasterPlan(){
+  const m = {
+    name: document.getElementById('mName').value.trim(),
+    rate: parseFloat(document.getElementById('mRate').value||0),
+    min: parseFloat(document.getElementById('mMin').value||0),
+    months: parseInt(document.getElementById('mMonths').value||1)
+  };
+  if(!m.name) return alert('نام پلن ضروری است.');
+  ST.masters = ST.masters || [];
+  const i = ST.masters.findIndex(x=>x.name===m.name);
+  if(i>=0) ST.masters[i]=m; else ST.masters.push(m);
+  save(); renderAdminAll();
+}
+function delMaster(i){ (ST.masters||[]).splice(i,1); save(); renderAdminAll(); }
+function clearMasters(){ if(!confirm('همه قالب‌ها حذف شوند؟')) return; ST.masters=[]; save(); renderAdminAll(); }
+
+// Transactions actions
+function setTxStatus(i, val){ if(!ST.txs||!ST.txs[i]) return; ST.txs[i].status = val; save(); }
+function delTx(i){ (ST.txs||[]).splice(i,1); save(); renderAdminAll(); }
+
+// News
+function addNews(){ const t=document.getElementById('newsText').value.trim(); if(!t) return; ST.news.unshift(t); document.getElementById('newsText').value=''; save(); renderAdminAll(); }
+function delNews(i){ (ST.news||[]).splice(i,1); save(); renderAdminAll(); }
+
+// Export / Import JSON
+function exportJSON(){
+  const blob = new Blob([JSON.stringify(ST,null,2)], {type:'application/json;charset=utf-8;'});
+  const url = URL.createObjectURL(blob); const a=document.createElement('a');
+  a.href=url; a.download='novainvest_data.json'; a.click(); URL.revokeObjectURL(url);
+}
+function importJSON(ev){
+  const f=ev.target.files[0]; if(!f) return;
+  const reader = new FileReader();
+  reader.onload = e=>{
+    try{ const data=JSON.parse(e.target.result); Object.assign(ST,data); save(); renderAdminAll(); alert('Import ok'); }
+    catch(err){ alert('خطا در JSON'); }
+  };
+  reader.readAsText(f);
+}
+
+// Admin route hook
+function onAdminRoute(){
+  if(localStorage.admin==="true"){ const link=document.getElementById('adminLink'); if(link) link.classList.remove('hidden'); }
+  if(ADM.logged){
+    document.getElementById('admLock').classList.add('hidden');
+    document.getElementById('admWrap').classList.remove('hidden');
+    renderAdminAll();
+  }else{
+    document.getElementById('admLock').classList.remove('hidden');
+    document.getElementById('admWrap').classList.add('hidden');
+  }
+}
+
+// ===== Boot =====
 function bootSeed(){
   if(!ST.txs || ST.txs.length===0){
     ST.txs = [
@@ -613,6 +803,5 @@ function bootSeed(){
   window.addEventListener('resize', drawCharts);
 })();
 </script>
-
 </body>
 </html>
